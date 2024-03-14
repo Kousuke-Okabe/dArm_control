@@ -1,0 +1,16 @@
+<launch>
+  <group ns="dArm">
+    <rosparam file="$(find darm_control)/config/darm_control.yaml" command="load"/>
+
+    <node name="controller_manager"
+        pkg="controller_manager"
+        type="spawner" respawn="false"
+        output="screen"
+        args="joint_state_controller
+              velocity_controller_q1
+              velocity_controller_q2
+              velocity_controller_q3"/>
+
+    <node name="darm_control" pkg="darm_control" type="darm_control" output="screen" respawn="false"/>
+  </group>
+</launch>

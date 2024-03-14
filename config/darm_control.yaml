@@ -1,0 +1,15 @@
+joint_state_controller:
+  type: "joint_state_controller/JointStateController"
+  publish_rate: 100
+
+velocity_controller_q1:
+  type: "velocity_controllers/JointVelocityController"
+  joint: q1
+
+velocity_controller_q2:
+  type: "velocity_controllers/JointVelocityController"
+  joint: q2
+
+velocity_controller_q3:
+  type: "velocity_controllers/JointVelocityController"
+  joint: q3
