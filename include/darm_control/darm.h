@@ -52,8 +52,8 @@ private:
   void allocate_goal_position(uint8_t* param_goal_position, int dxl_goal_position);
 
   hardware_interface::JointStateInterface jnt_state_interface;
-  hardware_interface::VelocityJointInterface jnt_vel_interface;
-  double cmd[3] = {0.0, 0.0, 0.0};
+  hardware_interface::PositionJointInterface jnt_pos_interface;
+  double cmd[3] = {DXL_POSITION_OFFSET_VALUE, DXL_POSITION_OFFSET_VALUE, DXL_POSITION_OFFSET_VALUE};
   double pos[3];
   double vel[3];
   double eff[3];
@@ -104,16 +104,16 @@ dArm::dArm()
   registerInterface(&jnt_state_interface);
 
   // connect and register the joint position interface
-  hardware_interface::JointHandle vel_handle_q1(jnt_state_interface.getHandle("q1"), &cmd[0]);
-  jnt_vel_interface.registerHandle(vel_handle_q1);
+  hardware_interface::JointHandle pos_handle_q1(jnt_state_interface.getHandle("q1"), &cmd[0]);
+  jnt_pos_interface.registerHandle(pos_handle_q1);
 
-  hardware_interface::JointHandle vel_handle_q2(jnt_state_interface.getHandle("q2"), &cmd[1]);
-  jnt_vel_interface.registerHandle(vel_handle_q2);
+  hardware_interface::JointHandle pos_handle_q2(jnt_state_interface.getHandle("q2"), &cmd[1]);
+  jnt_pos_interface.registerHandle(pos_handle_q2);
 
-  hardware_interface::JointHandle vel_handle_q3(jnt_state_interface.getHandle("q3"), &cmd[2]);
-  jnt_vel_interface.registerHandle(vel_handle_q3);
+  hardware_interface::JointHandle pos_handle_q3(jnt_state_interface.getHandle("q3"), &cmd[2]);
+  jnt_pos_interface.registerHandle(pos_handle_q3);
   
-  registerInterface(&jnt_vel_interface);
+  registerInterface(&jnt_pos_interface);
 
   // Open port
   if (portHandler->openPort())
