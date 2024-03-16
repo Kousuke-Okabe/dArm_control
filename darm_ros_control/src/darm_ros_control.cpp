@@ -2,7 +2,7 @@
 // #include <std_msgs/Float64.h>
 // #include <sensor_msgs/JointState.h>
 #include <controller_manager/controller_manager.h>
-#include <darm_control/darm.h>
+#include <darm_ros_control/darm.h>
 // #include <fstream>
 // #include <string>
 // #include <iostream>
@@ -32,7 +32,7 @@
 int main( int argc, char* argv[] ){
   // ROSノード初期化
   // ROS_INFO("main");
-  ros::init(argc, argv, "darm_control");
+  ros::init(argc, argv, "darm_ros_control");
   ros::NodeHandle nh;
 
   // Publisherの登録
@@ -53,7 +53,7 @@ int main( int argc, char* argv[] ){
   ros::AsyncSpinner spinner(1);
   spinner.start();
   ros::Time t = ros::Time::now();
-  ros::Rate rate(100.0); //[Hz]
+  ros::Rate rate(1000.0); //[Hz]
 
   while (ros::ok()){
     ros::Duration d = ros::Time::now() - t;
