@@ -2,9 +2,9 @@
     <group ns="TCP_controler">
         <include file="$(find darm_ros_control)/launch/darm_ros_control.launch"></include>
 
-        <note name = "tcp_control"
+        <node name = "tcp_control"
             pkg = "tcp_control"
-            type = "spawner" respawn = "false"
+            type = "tcp_control"
             output = "screen"
         />
     </group>

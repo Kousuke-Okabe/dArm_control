@@ -22,13 +22,14 @@ void Subscribe_Joint_State(const sensor_msgs::JointState::ConstPtr &JointState){
   q_present_angle(2) = (double)JointState->position[2];
 }
 
-void Subscribe_TCP_Commant(const std_msgs::Float64MultiArray &TCP_cmd){
+void Subscribe_TCP_Command(const std_msgs::Float64MultiArray &TCP_cmd){
+  ROS_INFO("TCP cmd subscribe: %f,%f", (double)TCP_cmd.data[0], (double)TCP_cmd.data[1]);
   r_command_position(0) = (double)TCP_cmd.data[0];
   r_command_position(1) = (double)TCP_cmd.data[1];
 }
 
 int main(int argc, char* argv[]){
-  ROS_INFO("TCP_controller")
+  ROS_INFO("TCP_controller");
 
   // ROSノード初期化
   ros::init(argc, argv, "tcp_control");
@@ -41,7 +42,7 @@ int main(int argc, char* argv[]){
 
   // Subscriberの登録
   ros::Subscriber sub_joint_state = nh.subscribe("/dArm/joint_states",10, Subscribe_Joint_State);
-  ros::Subscriber sub_tcp_commant = nh.subscribe("/dArm/tcp_commant",10, Subscribe_TCP_Commant);
+  ros::Subscriber sub_tcp_commant = nh.subscribe("/dArm/tcp_command",10, Subscribe_TCP_Command);
 
   // 周期設定
   ros::AsyncSpinner spinner(1);

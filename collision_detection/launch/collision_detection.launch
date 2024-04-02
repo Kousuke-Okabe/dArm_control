@@ -1,0 +1,13 @@
+<launch>
+  <group ns="dArm">
+    <rosparam file="$(find collision_detection)/config/collision_detection.yaml" command="load"/>
+
+    <node name="collision_detection"
+        pkg="collision_detection"
+        type="collision_detection" respawn="false"
+        output="screen"
+    />
+
+    <!-- <node name="darm_ros_control" pkg="darm_ros_control" type="darm_ros_control" output="screen" respawn="false"/> -->
+  </group>
+</launch>
