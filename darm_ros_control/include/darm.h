@@ -5,6 +5,7 @@
 
 #include <dynamixel_sdk.h>            // Uses Dynamixel SDK library
 #include <termios.h>
+# include <bits/stdc++.h>
 
 #define STDIN_FILENO 0
 
@@ -309,9 +310,9 @@ void dArm::read(){
   dxl3_present_current = groupSyncRead.getData(DXL3_ID, ADDR_PRESENT_CURRENT, LEN_PRESENT_CURRENT);
 
 
-  pos[0] = dxl1_present_position;
-  pos[1] = dxl2_present_position;
-  pos[2] = dxl3_present_position;
+  pos[0] = (double)(dxl1_present_position-2048)/1025*M_PI/2;
+  pos[1] = (double)(dxl2_present_position-2048)/1025*M_PI/2;
+  pos[2] = (double)(dxl3_present_position-2048)/1025*M_PI/2;
 
   vel[0] = dxl1_present_velocity;
   vel[1] = dxl2_present_velocity;
@@ -326,9 +327,9 @@ void dArm::read(){
 void dArm::write(){
 //   ROS_INFO_STREAM("q1 command " << cmd[0] << " q2 command " << cmd[1] << " q3 command " << cmd[2]);
 
-  allocate_goal_position(param_goal_1, (int)cmd[0]);
-  allocate_goal_position(param_goal_2, (int)cmd[1]);
-  allocate_goal_position(param_goal_3, (int)cmd[2]);
+  allocate_goal_position(param_goal_1, (int)cmd[0]*60/2/M_PI);
+  allocate_goal_position(param_goal_2, (int)cmd[1]*60/2/M_PI);
+  allocate_goal_position(param_goal_3, (int)cmd[2]*60/2/M_PI);
 
   // Add Dynamixel#1 goal position value to the Syncwrite storage
   dxl_addparam_result = groupSyncWrite.addParam(DXL1_ID, param_goal_1);
