@@ -1,5 +1,5 @@
 <launch>
-    <group ns="TCP_controler">
+    <!-- <group ns="TCP_controler"> -->
         <include file="$(find darm_ros_control)/launch/darm_ros_control.launch"></include>
 
         <node name = "tcp_control"
@@ -7,5 +7,5 @@
             type = "tcp_control"
             output = "screen"
         />
-    </group>
+    <!-- </group> -->
 </launch>

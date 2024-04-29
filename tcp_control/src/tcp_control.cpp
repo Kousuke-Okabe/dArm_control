@@ -23,9 +23,10 @@ void Subscribe_Joint_State(const sensor_msgs::JointState::ConstPtr &JointState){
 }
 
 void Subscribe_TCP_Command(const std_msgs::Float64MultiArray &TCP_cmd){
-  ROS_INFO("TCP cmd subscribe: %f,%f", (double)TCP_cmd.data[0], (double)TCP_cmd.data[1]);
-  r_command_position(0) = (double)TCP_cmd.data[0];
-  r_command_position(1) = (double)TCP_cmd.data[1];
+  ROS_INFO("Subscribe TCP command");
+  // ROS_INFO("TCP cmd subscribe: %f,%f", (double)TCP_cmd.data[0], (double)TCP_cmd.data[1]);
+  // r_command_position(0) = (double)TCP_cmd.data[0];
+  // r_command_position(1) = (double)TCP_cmd.data[1];
 }
 
 int main(int argc, char* argv[]){
@@ -36,13 +37,13 @@ int main(int argc, char* argv[]){
   ros::NodeHandle nh;
 
   // Publisherの登録
-  ros::Publisher pub_q1_cmd = nh.advertise<std_msgs::Float64>("/dArm/velocity_controller_q1/command",10);
-  ros::Publisher pub_q2_cmd = nh.advertise<std_msgs::Float64>("/dArm/velocity_controller_q2/command",10);
-  ros::Publisher pub_q3_cmd = nh.advertise<std_msgs::Float64>("/dArm/velocity_controller_q3/command",10);
+  ros::Publisher pub_q1_cmd = nh.advertise<std_msgs::Float64>("/velocity_controller_q1/command",10);
+  ros::Publisher pub_q2_cmd = nh.advertise<std_msgs::Float64>("/velocity_controller_q2/command",10);
+  ros::Publisher pub_q3_cmd = nh.advertise<std_msgs::Float64>("/velocity_controller_q3/command",10);
 
   // Subscriberの登録
-  ros::Subscriber sub_joint_state = nh.subscribe("/dArm/joint_states",10, Subscribe_Joint_State);
-  ros::Subscriber sub_tcp_commant = nh.subscribe("/dArm/tcp_command",10, Subscribe_TCP_Command);
+  ros::Subscriber sub_joint_state = nh.subscribe("/joint_states",10, Subscribe_Joint_State);
+  ros::Subscriber sub_tcp_commant = nh.subscribe("/tcp_command",10, Subscribe_TCP_Command);
 
   // 周期設定
   ros::AsyncSpinner spinner(1);
@@ -60,6 +61,8 @@ int main(int argc, char* argv[]){
   r_command_position << 0.0, ARM_LENGTH_LINK1+ARM_LENGTH_LINK2+ARM_LENGTH_LINK3;
 
   while(ros::ok()){
+    ros::spinOnce();
+
     ros::Duration d = ros::Time::now() - t;
     ros::Time t = ros::Time::now();
 
@@ -83,12 +86,14 @@ int main(int argc, char* argv[]){
     dq2.data = q_command_velocity(1);
     dq3.data = q_command_velocity(2);
 
-    pub_q1_cmd.publish(dq1);
-    pub_q2_cmd.publish(dq2);
-    pub_q3_cmd.publish(dq3);
+    // pub_q1_cmd.publish(dq1);
+    // pub_q2_cmd.publish(dq2);
+    // pub_q3_cmd.publish(dq3);
 
     rate.sleep();
   }
+
+  ros::spin();
 
   return 0;
 }

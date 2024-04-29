@@ -1,8 +1,8 @@
 #include <ros/ros.h>
-// #include <std_msgs/Float64.h>
+#include <std_msgs/Float64.h>
 // #include <sensor_msgs/JointState.h>
 #include <controller_manager/controller_manager.h>
-#include <darm_ros_control/darm.h>
+#include <darm.h>
 // #include <fstream>
 // #include <string>
 // #include <iostream>
@@ -35,13 +35,9 @@ int main( int argc, char* argv[] ){
   ros::init(argc, argv, "darm_ros_control");
   ros::NodeHandle nh;
 
-  // Publisherの登録
-  // ros::Publisher pub_dq1_cmd = nh.advertise<std_msgs::Float64>("/dArm/velocity_controller_q1/command",10);
-  // ros::Publisher pub_dq2_cmd = nh.advertise<std_msgs::Float64>("/dArm/velocity_controller_q2/command",10);
-  // ros::Publisher pub_dq3_cmd = nh.advertise<std_msgs::Float64>("/dArm/velocity_controller_q3/command",10);
-
-  // Subscriberの登録
-  // ros::Subscriber sub_joint_state = nh.subscribe("/dArm/joint_states",10, Subscribe_Joint_State);
+  // // Publisherの登録
+  // ros::Publisher pub_test = nh.advertise<std_msgs::Float64>("test",1000);
+  // std_msgs::Float64 temp;
 
   // ROS control
   // ROS_INFO("ROS control");
@@ -62,6 +58,10 @@ int main( int argc, char* argv[] ){
     robot.read();
     cm.update(t, d);
     robot.write();
+
+    // ROS_INFO("test data publish");
+    // temp.data = 10.0;
+    // pub_test.publish(temp);
 
     rate.sleep();
   }
