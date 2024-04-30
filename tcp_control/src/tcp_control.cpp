@@ -25,7 +25,7 @@ void Subscribe_Joint_State(const sensor_msgs::JointState::ConstPtr &JointState){
 
 void Subscribe_TCP_Command(const std_msgs::Float64MultiArray &TCP_cmd){
   // ROS_INFO("Subscribe TCP command");
-  ROS_INFO("TCP cmd subscribe: %f,%f", (double)TCP_cmd.data[0], (double)TCP_cmd.data[1]);
+  // ROS_INFO("TCP cmd subscribe: %f,%f", (double)TCP_cmd.data[0], (double)TCP_cmd.data[1]);
   r_command_position(0) = (double)TCP_cmd.data[0];
   r_command_position(1) = (double)TCP_cmd.data[1];
 }
@@ -51,6 +51,7 @@ int main(int argc, char* argv[]){
   double ARM_LENGTH_LINK2 = nh.param<double>("ARM_LENGTH_LINK3",0.09);
   double ARM_LENGTH_LINK3 = nh.param<double>("ARM_LENGTH_LINK2",0.053);
   double Kp = nh.param<double>("Position_Gain",1);
+  ROS_INFO("TCP control Gain: %.3f", Kp);
 
   // 周期設定
   int Fs = nh.param<int>("Frequency",100);
@@ -106,7 +107,7 @@ int main(int argc, char* argv[]){
     dq2.data = q_command_velocity(1);
     dq3.data = q_command_velocity(2);
 
-    ROS_INFO("r_ref[%.3f, %.3f]  r_res[%.3f, %.3f]", r_command_position(0),r_command_position(1), r_present_position(0),r_present_position(1));
+    // ROS_INFO("r_ref[%.3f, %.3f]  r_res[%.3f, %.3f]", r_command_position(0),r_command_position(1), r_present_position(0),r_present_position(1));
 
     rate.sleep();
   }
