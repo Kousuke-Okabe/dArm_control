@@ -1,0 +1,12 @@
+<launch>
+    <rosparam file="$(find move_circle)/config/move_circle.yaml" command="load"/>
+
+    <include file="$(find tcp_control)/launch/tcp_control.launch"></include>
+
+    <node name="move_circle"
+        pkg="move_circle"
+        type="move_circle"
+        respawn="false"
+        output="screen"
+    />
+</launch>

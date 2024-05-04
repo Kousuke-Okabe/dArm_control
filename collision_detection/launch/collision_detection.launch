@@ -1,6 +1,6 @@
 <launch>
   <!-- <group ns="dArm"> -->
-    <include file="$(find darm_ros_control)/launch/darm_ros_control.launch" />
+    <!-- <include file="$(find darm_ros_control)/launch/darm_ros_control.launch" /> -->
     
     <rosparam file="$(find collision_detection)/config/collision_detection.yaml" command="load"/>
 

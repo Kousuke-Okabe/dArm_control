@@ -5,7 +5,7 @@
 
 #include <dynamixel_sdk.h>            // Uses Dynamixel SDK library
 #include <termios.h>
-# include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 #define STDIN_FILENO 0
 

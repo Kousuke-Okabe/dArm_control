@@ -1,1 +1,2 @@
-Threshold_of_CollisionDetection: 10.0
+Threshold_of_CollisionDetection: 30
+DETECTION_FREQUENCY: 5

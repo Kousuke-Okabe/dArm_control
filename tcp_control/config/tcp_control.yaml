@@ -2,4 +2,5 @@ ARM_LENGTH_LINK1: 0.09
 ARM_LENGTH_LINK2: 0.09
 ARM_LENGTH_LINK3: 0.053
 Position_Gain: 0.05
-Frequency: 100
+Orientation_Gain: 0.8
+TCP_CONTROL_Frequency: 100
