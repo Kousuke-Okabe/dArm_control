@@ -44,6 +44,7 @@ int main(int argc, char* argv[]){
   ros::Publisher pub_q1_cmd = nh.advertise<std_msgs::Float64>("/velocity_controller_q1/command",10);
   ros::Publisher pub_q2_cmd = nh.advertise<std_msgs::Float64>("/velocity_controller_q2/command",10);
   ros::Publisher pub_q3_cmd = nh.advertise<std_msgs::Float64>("/velocity_controller_q3/command",10);
+  ros::Publisher pub_r_pre = nh.advertise<std_msgs::Float64MultiArray>("/tcp_present",10);
 
   // ROS_INFO("Subscribe");
   // Subscriberの登録
@@ -68,6 +69,9 @@ int main(int argc, char* argv[]){
   ros::Rate rate(Fs); //[Hz]
 
   // ROS_INFO("Set variable");
+  std_msgs::Float64MultiArray r_present;
+  r_present.data.resize(3);
+
   Vector2d r_present_position;
   Vector3d q_command_velocity;
   double eta_present_angle;
@@ -124,6 +128,13 @@ int main(int argc, char* argv[]){
     dq1.data = q_command_velocity(0);
     dq2.data = q_command_velocity(1);
     dq3.data = q_command_velocity(2);
+
+    // Publish the r_present
+    r_present.data[0] = r_present_position(0);
+    r_present.data[1] = r_present_position(1);
+    r_present.data[2] = eta_present_angle;
+
+    pub_r_pre.publish(r_present);
 
     // ROS_INFO("eta_command: %.3f, eta_present; %.3f", eta_command_angle, eta_present_angle);
     // ROS_INFO("Jeta: %.3f, %.3f, %.3f", Jeta(0),Jeta(1),Jeta(2));

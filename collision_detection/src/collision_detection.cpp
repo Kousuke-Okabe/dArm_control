@@ -69,8 +69,8 @@ int main(int argc, char* argv[]){
 
     Us = (E - Jp * jacobi) * Tau_present_torque;
 
-    if(Us.norm() > Sigma)   ROS_INFO("||Us||=%02.3f>%02.3f,  Collision", (double)Us.norm(),Sigma);
-    else                    ROS_INFO("||Us||=%02.3f<=%02.3f, without Collision", (double)Us.norm(),Sigma);
+    if(Us.norm() > Sigma)   ROS_INFO("||Us||=%7.3f> %2.1f  Collision", (double)Us.norm(),Sigma);
+    else                    ROS_INFO("||Us||=%7.3f<=%2.1f", (double)Us.norm(),Sigma);
 
     rate.sleep();
   }
