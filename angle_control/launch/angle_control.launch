@@ -1,0 +1,13 @@
+<launch>
+    <!-- <group ns="TCP_controler"> -->
+        <rosparam file="$(find angle_control)/config/angle_control.yaml" command="load"/>
+
+        <include file="$(find darm_ros_control)/launch/darm_ros_control.launch"></include>
+
+        <node name = "angle_control"
+            pkg = "angle_control"
+            type = "angle_control"
+            output = "screen"
+        />
+    <!-- </group> -->
+</launch>

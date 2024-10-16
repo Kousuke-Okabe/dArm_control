@@ -35,9 +35,9 @@ int main( int argc, char* argv[] ){
   ros::init(argc, argv, "darm_ros_control");
   ros::NodeHandle nh;
 
-  // // Publisherの登録
-  // ros::Publisher pub_test = nh.advertise<std_msgs::Float64>("test",1000);
-  // std_msgs::Float64 temp;
+  // Publisherの登録
+  // ros::Publisher pub_q_pre = nh.advertise<std_msgs::Float64MultiArray>("/angle_present",10);
+
 
   // ROS control
   // ROS_INFO("ROS control");
