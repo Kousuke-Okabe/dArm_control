@@ -14,7 +14,7 @@
     -   URL : https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/download/
 
 3. U2D2 driver
-    -    Install
+    -    Install  
           `$ wget https://raw.githubusercontent.com/ROBOTIS-GIT/dynamixel-workbench/master/99-dynamixel-workbench-cdc.rules`  
           `$ sudo cp ./99-dynamixel-workbench-cdc.rules /etc/udev/rules.d/`  
           `$ sudo udevadm control --reload-rules`  
