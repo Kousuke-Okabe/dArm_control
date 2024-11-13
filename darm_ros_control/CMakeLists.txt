@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   controller_manager
   std_msgs
+  dynamixel_sdk
 )
 
 ## System dependencies are found with CMake's conventions
@@ -118,11 +119,13 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
-  ~/lib/DynamixelSDK-3.7.31/c++/include/dynamixel_sdk
+  # ~/lib/DynamixelSDK-3.7.31/c++/include/dynamixel_sdk
+  /opt/ros/melodic/include/dynamixel_sdk/
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
+# add_library(
+#   ${PROJECT_NAME}
 #   src/${PROJECT_NAME}/darm_control.cpp
 # )
 
@@ -150,7 +153,8 @@ add_executable(${PROJECT_NAME} src/darm_ros_control.cpp)
 target_link_libraries(
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
-  -ldxl_x64_cpp
+  # dynamixel_sdk
+  # -ldxl_x64_cpp
   -lrt
 )
 

@@ -3,7 +3,7 @@
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/robot_hw.h>
 
-#include <dynamixel_sdk.h>            // Uses Dynamixel SDK library
+#include "dynamixel_sdk.h"            // Uses Dynamixel SDK library
 #include <termios.h>
 #include <bits/stdc++.h>
 
