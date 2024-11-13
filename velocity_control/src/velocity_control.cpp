@@ -32,7 +32,7 @@
 int main( int argc, char* argv[] ){
   // ROSノード初期化
   // ROS_INFO("main");
-  ros::init(argc, argv, "darm_ros_control");
+  ros::init(argc, argv, "velocity_control");
   ros::NodeHandle nh;
 
   // Publisherの登録
