@@ -22,5 +22,5 @@
    -    URL : https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_workbench/
 
 ## 調整
-CMakeLists.txtのinclude_directoriesを修正  
+dArm_control/velocity_control/CMakeLists.txtのinclude_directoriesを修正  
 `/opt/ros/[ROS Distribution]/include/dynamixel_sdk/`
